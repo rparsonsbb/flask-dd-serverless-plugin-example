@@ -1,0 +1,15 @@
+{
+  "name": "flask-example",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-plugin-datadog": "^0.10.0",
+    "serverless-python-requirements": "^5.0.1",
+    "serverless-wsgi": "^1.7.4"
+  }
+}

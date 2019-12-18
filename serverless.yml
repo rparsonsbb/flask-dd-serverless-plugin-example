@@ -1,0 +1,41 @@
+service: flask-example
+app: <app>
+org: <org>
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-plugin-datadog
+custom:
+  datadog:
+    addLayers: true
+    apiKey: <DDAPIKEY>
+    logLevel: "INFO"
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  runtime: python3.7
+  memorySize: 256
+  timeout: 90
+  stage: dev
+  tracing:
+    apiGateway: true
+    lambda: true
+  region: us-east-1
+
+functions:
+  app:
+    handler: wsgi_handler.handler
+    events:
+      - http: ANY /
+        cors:
+          origin: '*'
+      - http: 'ANY {proxy+}'
+        cors:
+          origin: '*'
+
